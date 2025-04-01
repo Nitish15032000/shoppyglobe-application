@@ -4,6 +4,7 @@ import { Provider } from "react-redux"
 import store from "./redux/store"
 import Header from "./components/Header"
 import Loading from "./components/Loading"
+import Footer from "./pages/Footer"
 
 // Lazy loaded components
 const Home = lazy(() => import("./pages/Home"))
@@ -29,6 +30,7 @@ function App() {
               </Routes>
             </Suspense>
           </main>
+          <Footer />
         </div>
       </Router>
     </Provider>

@@ -38,7 +38,7 @@ const ProductList = ({ products, isLoading, error }) => {
   }
 
   return (
-    <div className="product-grid">
+    <div className="product-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {filteredProducts.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}

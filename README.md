@@ -41,10 +41,6 @@ A modern **E-commerce application** built with with **React**, **Vite**,**react-
   ```sh
   git clone https://github.com/Nitish15032000/shoppyglobe-application.git
 
-Extract the ZIP File (If Downloaded Manually):
-    Unzip the To-Do-Application.zip file.
-
-
 2. Install Node.js (If Not Installed):
         Make sure Node.js is installed. Check by running:
 

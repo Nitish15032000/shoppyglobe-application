@@ -4,6 +4,7 @@ import { setSearchTerm } from "../redux/productSlice"
 import ProductList from "../components/ProductList"
 import { useProductList } from "../hooks/useProductList"
 import { FaSearch } from "react-icons/fa"
+import Hero from "../components/Hero"
 
 const Home = () => {
   const { products, isLoading, error } = useProductList()
@@ -16,13 +17,11 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Welcome to ShoppyGlobe</h1>
-        <p className="text-gray-600">Discover amazing products at unbeatable prices</p>
-      </div>
+    <>
+      {/* Hero Section */}
+      <Hero />
 
-      <div className="mb-6">
+      <div className="mb-6 mt-4 roubnded-md shadow-md p-4 bg-white">
         <form onSubmit={handleSearch} className="flex">
           <div className="relative flex-grow">
             <input
@@ -44,7 +43,7 @@ const Home = () => {
       </div>
 
       <ProductList products={products} isLoading={isLoading} error={error} />
-    </div>
+    </>
   )
 }
 

@@ -5,6 +5,8 @@ import store from "./redux/store"
 import Header from "./components/Header"
 import Loading from "./components/Loading"
 import Footer from "./pages/Footer"
+import SignIn from "./pages/SignIn"
+import SignUp from "./pages/SignUp"
 
 // Lazy loaded components
 const Home = lazy(() => import("./pages/Home"))
@@ -26,6 +28,8 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

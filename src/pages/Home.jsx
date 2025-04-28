@@ -17,33 +17,50 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-blue-50 to-purple-100">
       {/* Hero Section */}
-      <Hero />
-
-      <div className="mb-6 mt-4 roubnded-md shadow-md p-4 bg-white">
-        <form onSubmit={handleSearch} className="flex">
-          <div className="relative flex-grow">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md transition-colors"
-          >
-            Search
-          </button>
-        </form>
+      <div className="mb-6 sm:mb-12">
+        <Hero />
       </div>
 
-      <ProductList products={products} isLoading={isLoading} error={error} />
-    </>
+      {/* Search Section */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6">
+          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
+            <div className="relative flex-grow">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg sm:rounded-r-none 
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                           text-gray-700 placeholder-gray-400 bg-gray-50 transition-all duration-300"
+              />
+              <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            <button
+              type="submit"
+              className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 
+                         text-white font-medium rounded-lg sm:rounded-l-none hover:from-blue-600 
+                         hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                         focus:ring-blue-500 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Products Section */}
+      <div className="mt-8 pb-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ProductList 
+          products={products} 
+          isLoading={isLoading} 
+          error={error} 
+        />
+      </div>
+    </div>
   )
 }
 

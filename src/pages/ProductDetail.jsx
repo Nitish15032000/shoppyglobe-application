@@ -77,7 +77,7 @@ const ProductDetail = () => {
   if (!product) return null
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-blue-50 to-purple-100 px-4 sm:px-6 lg:px-8 py-8">
       <button
         onClick={() => navigate("/")}
         className="flex items-center text-blue-600 hover:text-blue-800 mb-6 transition-colors"
@@ -85,7 +85,8 @@ const ProductDetail = () => {
         <FaArrowLeft className="mr-2" /> Back to Products
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg shadow-lg p-6">
+        {/* Product Images */}
         <div>
           <div className="mb-4 h-80 overflow-hidden rounded-lg">
             <img
@@ -114,6 +115,7 @@ const ProductDetail = () => {
           </div>
         </div>
 
+        {/* Product Details */}
         <div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.title}</h1>
 

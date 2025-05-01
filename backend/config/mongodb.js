@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true }, dbName: 'e-commerce' };
 
 const uri = process.env.MONGODB_URI ;
 async function connectDB() {

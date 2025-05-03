@@ -1,25 +1,49 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
-// route for loginUser
-export const loginUser = async (req, res) => {
-  res.json({
-    message: "loginUser registered successfully",
-  });
 
-}
 
 // create token function for the user authentication
 const createToken = async (id) => {
 
   return jwt.sign({ id }, process.env.JWT_SECRET);
 
-          // or 
+  // or 
 
   // return jwt.sign({ id }, process.env.JWT_SECRET, {
   //   expiresIn: "30d",
   // });
 }
+
+
+// route for loginUser
+export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const exits = await userModel.findOne({ email });
+    if (!exits) {
+      return res.status(400).json({ message: "User does`t exits" });
+    }
+
+    // checking password
+    const isMatch = await bcrypt.compare(password, exits.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    } else {
+      // creating token
+      const token = await createToken(exits._id);
+      res.json({ success: true, token });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: `login is not working ${error.massage}` });
+
+  }
+
+}
+
 
 // route for registerUser
 export const registerUser = async (req, res) => {
@@ -37,7 +61,7 @@ export const registerUser = async (req, res) => {
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Please enter a valid email" });
     }
-   
+
     // checking user is already exits or Not
     const exits = await userModel.findOne({ email });
     if (exits) {
@@ -62,7 +86,7 @@ export const registerUser = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.json({success:false, message: "Internal server error" });
+    res.json({ success: false, message: `registering the user is not working ${error.massage}` });
   }
 
 

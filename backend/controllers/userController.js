@@ -5,14 +5,9 @@ import userModel from "../models/userModel.js";
 
 // create token function for the user authentication
 const createToken = async (id) => {
-
-  return jwt.sign({ id }, process.env.JWT_SECRET);
-
-  // or 
-
-  // return jwt.sign({ id }, process.env.JWT_SECRET, {
-  //   expiresIn: "30d",
-  // });
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
 }
 
 
@@ -95,8 +90,23 @@ export const registerUser = async (req, res) => {
 
 // route for adminLogin
 export const adminLogin = async (req, res) => {
-  res.json({
-    message: "adminLogin registered successfully",
-  });
+  try {
+    const { email, password } = req.body;
 
-}
+    // Retrieve admin credentials from .env
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    // Validate admin credentials
+    if (email === adminEmail && password === adminPassword) {
+      // Create token with 30-day expiration
+      const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "30d" });
+      res.status(200).json({ success: true, token, message: "Admin login successful" });
+    } else {
+      res.status(401).json({ success: false, message: "Invalid admin email or password" });
+    }
+  } catch (error) {
+    console.error("Error during admin login:", error);
+    res.status(500).json({ success: false, message: "Admin login failed", error: error.message });
+  }
+};

@@ -107,5 +107,25 @@ export const singleProduct = async (req, res) => {
 
 // remove product by id
 export const removeProduct = async (req, res) => {
-   res.json({ message: "Remove product" });
+   try {
+      const product = await ProductModel.findByIdAndDelete(req.params.id);
+      if (!product) {
+         return res.status(404).json({
+            success: false,
+            message: "Product not found",
+         });
+      }
+      res.status(200).json({
+         success: true,
+         message: "Product removed successfully",
+         product,
+      });
+   } catch (error) {
+      console.error("Error removing product:", error);
+      res.status(500).json({
+         success: false,
+         message: "Failed to remove product",
+         error: error.message,
+      });
+   }
 }
